@@ -3,6 +3,7 @@
 // Licensed under the MIT license. See LICENSE.txt file in the project root for full license information.  
 //
 
+using System;
 using Microsoft.ConfigurationManagement.ManagementProvider;
 using Microsoft.ConfigurationManagement.ManagementProvider.WqlQueryEngine;
 
@@ -27,7 +28,7 @@ namespace AutoIt.SCCM.SDK.Snippets
                         using (item)
                         {
                             string packageName = item["Name"].StringValue;
-                            OutputLine("Package: " + packageName);
+                            Console.WriteLine("Package: " + packageName);
                         }
                     }
                 }
@@ -52,7 +53,7 @@ namespace AutoIt.SCCM.SDK.Snippets
                     foreach (IResultObject item in queryResults)
                     {
                         string packageName = item["Name"].StringValue;
-                        OutputLine("Package: " + packageName);
+                        Console.WriteLine("Package: " + packageName);
 
                         // Must call Dispose on each item enumerated
                         item.Dispose();
@@ -75,7 +76,7 @@ namespace AutoIt.SCCM.SDK.Snippets
             using (IResultObject item = IResultObjectReturnSmsPackage(wqlConnection))
             {
                 string packageName = item["Name"].StringValue;
-                OutputLine("Package: " + packageName);
+                Console.WriteLine("Package: " + packageName);
             }
         }
 

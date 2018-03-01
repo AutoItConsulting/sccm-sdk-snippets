@@ -24,9 +24,9 @@ namespace AutoIt.SCCM.SDK.Snippets
             var userName = "";
             var password = "";
 
-            OutputLine("Site server you want to connect to (press Return for this computer): ");
+            Console.WriteLine("Site server you want to connect to (press Return for this computer): ");
             computer = Console.ReadLine();
-            OutputLine();
+            Console.WriteLine();
 
             if (string.IsNullOrEmpty(computer) || computer == ".")
             {
@@ -36,12 +36,12 @@ namespace AutoIt.SCCM.SDK.Snippets
             }
             else
             {
-                OutputLine("Please enter the user name (press Return for current user): ");
+                Console.WriteLine("Please enter the user name (press Return for current user): ");
                 userName = Console.ReadLine();
 
                 if (!string.IsNullOrEmpty(userName))
                 {
-                    OutputLine("Please enter your password: ");
+                    Console.WriteLine("Please enter your password: ");
                     password = ReturnPassword();
                 }
             }
@@ -75,7 +75,7 @@ namespace AutoIt.SCCM.SDK.Snippets
         {
             try
             {
-                OutputLine("Connecting...");
+                Console.WriteLine("Connecting...");
                 var namedValues = new SmsNamedValuesDictionary();
                 var connection = new WqlConnectionManager(namedValues);
                 if (string.IsNullOrEmpty(userName))
@@ -91,12 +91,12 @@ namespace AutoIt.SCCM.SDK.Snippets
             }
             catch (SmsException ex)
             {
-                OutputLine("Failed to Connect. Error: " + ex.Message);
+                Console.WriteLine("Failed to Connect. Error: " + ex.Message);
                 return null;
             }
             catch (UnauthorizedAccessException ex)
             {
-                OutputLine("Failed to authenticate. Error:" + ex.Message);
+                Console.WriteLine("Failed to authenticate. Error:" + ex.Message);
                 return null;
             }
         }
@@ -135,24 +135,6 @@ namespace AutoIt.SCCM.SDK.Snippets
 
             return password;
 
-        }
-
-        /// <summary>
-        /// Write output with no newline. Wrapper in case want to output to something other than console later.
-        /// </summary>
-        /// <param name="output"></param>
-        public void Output(string output = "")
-        {
-            Console.Write(output);
-        }
-
-        /// <summary>
-        /// Write output with newline. Wrapper in case want to output to something other than console later.
-        /// </summary>
-        /// <param name="output"></param>
-        public void OutputLine(string output = "")
-        {
-            Console.WriteLine(output);
         }
     }
 }
