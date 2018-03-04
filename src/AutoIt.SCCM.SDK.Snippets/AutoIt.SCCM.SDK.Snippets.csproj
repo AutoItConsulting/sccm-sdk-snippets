@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions.cs" />
     <Compile Include="Fundamentals\IResultObjectDisposal.cs" />
     <Compile Include="Fundamentals\LazyProperties.cs" />
     <Compile Include="Program.cs" />

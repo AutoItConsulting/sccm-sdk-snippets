@@ -21,18 +21,18 @@ namespace AutoIt.SCCM.SDK.Snippets
                 {
                     foreach (IResultObject collection in collections)
                     {
+                        // Show collection name
+                        Console.WriteLine(collection["Name"].StringValue);
+
                         // Get the collection object and lazy properties.  
                         collection.Get();
 
-                        Console.WriteLine(collection["Name"].StringValue);
-
-                        // Get the rules.  
+                        // Get the rules from CollectionRules which is a lazy property  
                         List<IResultObject> rules = collection.GetArrayItems("CollectionRules");
                         
                         if (rules.Count == 0)
                         {
                             Console.WriteLine("No rules");
-                            Console.WriteLine();
                             continue;
                         }
 
@@ -41,8 +41,6 @@ namespace AutoIt.SCCM.SDK.Snippets
                             // Display rule names.  
                             Console.WriteLine("Rule name: " + rule["RuleName"].StringValue);
                         }
-
-                        Console.WriteLine();
                     }
                 }
             }  
