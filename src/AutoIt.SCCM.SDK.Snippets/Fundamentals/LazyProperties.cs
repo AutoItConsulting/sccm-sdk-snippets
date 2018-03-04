@@ -41,6 +41,9 @@ namespace AutoIt.SCCM.SDK.Snippets
                             // Display rule names.  
                             Console.WriteLine("Rule name: " + rule["RuleName"].StringValue);
                         }
+
+                        // Dispose the rules using our List extension method
+                        rules.DisposeItems();
                     }
                 }
             }  
