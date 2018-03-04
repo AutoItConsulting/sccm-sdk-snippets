@@ -15,13 +15,16 @@ namespace AutoIt.SCCM.SDK.Snippets
         /// IResultObject disposal version 1. Automatic Dispose with Using keyword.
         /// </summary>
         /// <param name="wqlConnection"></param>
-        private void IResultObjectDisposalV1(WqlConnectionManager wqlConnection)
+        private void IResultObjectExecuteQueryDisposalV1(WqlConnectionManager wqlConnection)
         {
             try
             {
                 // As an example, get all SMS_Package objects.
+                // ExecuteQuery returns IResultObject which is a WqlQueryResultsObject
                 using (IResultObject queryResults = wqlConnection.QueryProcessor.ExecuteQuery("SELECT * FROM SMS_Package"))
                 {
+                    // WqlQueryResultsObject.GetEnumerator() is implemented as:
+                    // yield return (object) new WqlResultObject(this.ConnectionManager, this.ConnectionManager.NamedValueDictionary, managementObject);
                     foreach (IResultObject item in queryResults)
                     {
                         // Must call Dispose on each item enumerated
@@ -43,13 +46,16 @@ namespace AutoIt.SCCM.SDK.Snippets
         /// IResultObject disposal version 2. Manual call of Dipose.
         /// </summary>
         /// <param name="wqlConnection"></param>
-        private void IResultObjectDisposalV2(WqlConnectionManager wqlConnection)
+        private void IResultObjectExecuteQueryDisposalV2(WqlConnectionManager wqlConnection)
         {
             try
             {
                 // As an example, get all SMS_Package objects.
+                // ExecuteQuery returns IResultObject which is a WqlQueryResultsObject
                 using (IResultObject queryResults = wqlConnection.QueryProcessor.ExecuteQuery("SELECT * FROM SMS_Package"))
                 {
+                    // WqlQueryResultsObject.GetEnumerator() is implemented as:
+                    // yield return (object) new WqlResultObject(this.ConnectionManager, this.ConnectionManager.NamedValueDictionary, managementObject);
                     foreach (IResultObject item in queryResults)
                     {
                         string packageName = item["Name"].StringValue;

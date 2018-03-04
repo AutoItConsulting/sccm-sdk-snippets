@@ -55,9 +55,10 @@ namespace AutoIt.SCCM.SDK.Snippets
 
             // Call snippets - uncomment required snippets.
             // Fundamentals
-            IResultObjectDisposalV1(wqlConnection);
-            IResultObjectDisposalV2(wqlConnection);
+            IResultObjectExecuteQueryDisposalV1(wqlConnection);
+            IResultObjectExecuteQueryDisposalV2(wqlConnection);
             IResultObjectDisposalOfReturnValue(wqlConnection);
+            LazyPropertyFromQuery(wqlConnection);
 
             // Disconnect
             wqlConnection.Close();

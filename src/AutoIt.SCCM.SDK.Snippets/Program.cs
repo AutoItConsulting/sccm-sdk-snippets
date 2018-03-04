@@ -43,24 +43,18 @@ namespace AutoIt.SCCM.SDK.Snippets
 
             var askedAssemblyName = new AssemblyName(args.Name);
 
-            // failing to ignore queries for satellite resource assemblies or using [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)] 
+            // Failing to ignore queries for satellite resource assemblies or using [assembly: NeutralResourcesLanguage("en-US", UltimateResourceFallbackLocation.MainAssembly)] 
             // in AssemblyInfo.cs will crash the program on non en-US based system cultures.
             if (askedAssemblyName.Name.EndsWith(".resources") && askedAssemblyName.CultureInfo.Equals(CultureInfo.InvariantCulture) == false)
             {
                 return null;
             }
 
-            string assemblyDllName = askedAssemblyName.Name;
-
-            assemblyDllName += ".dll";
-
-            string consolePath = Environment.GetEnvironmentVariable("SMS_ADMIN_UI_PATH");
-
-            string message = "The following DLL is missing:\r\n" + assemblyDllName;
-            message += "\r\n\r\n";
-            message += "Please install the Configuration Manager Admin Console or copy the named DLL into the application directory.";
-
+            string assemblyDllName = askedAssemblyName.Name + ".dll";
             string assemblyDllPath = string.Empty;
+
+            // Get the console location
+            string consolePath = Environment.GetEnvironmentVariable("SMS_ADMIN_UI_PATH");
 
             if (!string.IsNullOrEmpty(consolePath))
             {
@@ -70,11 +64,16 @@ namespace AutoIt.SCCM.SDK.Snippets
 
             assemblyDllPath += "\\" + assemblyDllName;
 
+            // Check if the file exists, if so load it and return
             if (File.Exists(assemblyDllPath))
             {
                 Assembly assembly = Assembly.LoadFrom(assemblyDllPath);
                 return assembly;
             }
+
+            string message = "The following DLL is missing:\r\n" + assemblyDllName;
+            message += "\r\n\r\n";
+            message += "Please install the Configuration Manager Admin Console or copy the named DLL into the application directory.";
 
             //MessageBox.Show(message);
             Console.WriteLine(message);
