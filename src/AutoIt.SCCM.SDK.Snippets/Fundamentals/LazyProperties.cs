@@ -12,6 +12,10 @@ namespace AutoIt.SCCM.SDK.Snippets
 {
     internal partial class Wrapper
     {
+        /// <summary>
+        /// Use ExecuteQuery and gets a lazy property for an SMS_Collection object.
+        /// </summary>
+        /// <param name="connection"></param>
         public void LazyPropertyFromQuery(WqlConnectionManager connection)  
         {  
             try  
