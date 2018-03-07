@@ -63,7 +63,7 @@ namespace AutoIt.SCCM.SDK.Snippets
             //IResultObjectExecuteQueryDisposalV1(wqlConnection);
             //IResultObjectExecuteQueryDisposalV2(wqlConnection);
             //IResultObjectDisposalOfReturnValue(wqlConnection);
-            LazyPropertyFromQuery(wqlConnection);
+            //LazyPropertyFromQuery(wqlConnection);
 
             // Disconnect
             wqlConnection.Close();

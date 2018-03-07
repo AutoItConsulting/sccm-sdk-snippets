@@ -7,6 +7,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 
 namespace AutoIt.SCCM.SDK.Snippets  
 {
@@ -75,8 +76,8 @@ namespace AutoIt.SCCM.SDK.Snippets
             message += "\r\n\r\n";
             message += "Please install the Configuration Manager Admin Console or copy the named DLL into the application directory.";
 
-            //MessageBox.Show(message);
-            Console.WriteLine(message);
+            MessageBox.Show(message);
+            //Console.WriteLine(message);
 
             Environment.Exit(1);
             return null;
